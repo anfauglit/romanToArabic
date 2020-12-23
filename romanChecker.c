@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 
 int *strToPrimes (char *s) {
 	int *primeForm;
@@ -42,8 +43,15 @@ int *strToPrimes (char *s) {
 }
 
 int main(int argc, char **argv) {
-	
-	char *s = argv[1];
+
+	char *s;
+
+	if (argc == 2) 	
+		s = argv[1];
+	else {
+		perror("Wrong number of arguments");
+		exit(EXIT_FAILURE);
+	}
 
 	int* pr = strToPrimes(s);
 
@@ -96,7 +104,7 @@ int main(int argc, char **argv) {
 	if (i == strlen(s)) 
 		printf("Roman notation is legit. Converted number: %i\n", sum);
 	else
-		printf("Roman notation is not legit\n");
+		printf("Roman notation is not legit.\n");
 		
 	free(pr);
 	return 0;
